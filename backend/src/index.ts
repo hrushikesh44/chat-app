@@ -1,6 +1,7 @@
 import express from 'express';
 import authRoutes from './routes/auth';
 import uploadRoutes from './routes/upload';
+import messageRoutes from './routes/message';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
@@ -13,6 +14,7 @@ const aws = process.env.AWS_ACCESS_KEY_ID;
 
 app.use('/api/auth', authRoutes);
 app.use('/api', uploadRoutes);
+app.use('/api/mesage', messageRoutes);
 
 async function main() {
   await mongoose.connect(url);
