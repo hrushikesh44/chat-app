@@ -1,6 +1,6 @@
 import express from 'express';
 import authRoutes from './routes/auth';
-import uploadRoutes from './routes/upload';
+import uploadRoutes from './controllers/uploadHandler';
 import messageRoutes from './routes/message';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';

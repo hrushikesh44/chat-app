@@ -1,17 +1,9 @@
 import mongoose, { Document, Mongoose, Schema } from 'mongoose';
 import dotenv from 'dotenv';
-import { TrustedAdvisor } from 'aws-sdk';
 
 dotenv.config();
 
 const url = process.env.MONGODB_URI;
-
-export interface UserDocument extends Document {
-  email: String;
-  fullName: String;
-  password: String;
-  profilePic: String;
-}
 
 const userSchema = new Schema(
   {
@@ -56,7 +48,7 @@ const messageSchema = new Schema({
   },
 });
 
-export const Message = mongoose.model<UserDocument>('Message', messageSchema);
+export const Message = mongoose.model('Message', messageSchema);
 export const User = mongoose.model('User', userSchema);
 
 mongoose.connect(url);
