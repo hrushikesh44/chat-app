@@ -14,7 +14,7 @@ const aws = process.env.AWS_ACCESS_KEY_ID;
 
 app.use('/api/auth', authRoutes);
 app.use('/api', uploadRoutes);
-app.use('/api/mesage', messageRoutes);
+app.use('/api/message', messageRoutes);
 
 async function main() {
   await mongoose.connect(url);

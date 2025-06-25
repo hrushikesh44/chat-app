@@ -4,6 +4,7 @@ import multerS3 from 'multer-s3';
 import { S3Client } from '@aws-sdk/client-s3';
 import dotenv from 'dotenv';
 import { authMiddleware } from '../middleware/loginMiddleware';
+import { User } from '../models/db';
 
 dotenv.config();
 
@@ -41,11 +42,16 @@ const upload = multer({
   }),
 });
 
-router.post('/upload', authMiddleware, upload.single('image'), (req: Request, res) => {
+router.post('/upload', authMiddleware, upload.single('image'), async (req: Request, res) => {
   const file = req.file as Express.MulterS3.File;
   res.json({
     message: 'Image uploaded successfully',
     imageUrl: file.location,
+  });
+  await User.updateOne({
+    $set: {
+      profilePic: file.location,
+    },
   });
 });
 
