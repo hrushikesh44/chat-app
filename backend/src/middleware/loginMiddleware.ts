@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { User } from '../models/db';
 
 const JWT_PASSWORD = process.env.JWT_PASSWORD;
 
@@ -15,6 +16,10 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
       return;
     }
     req.userId = (decoded as JwtPayload).id;
+    //@ts-ignore
+    req.user = await User.findById(req.userId);
+    console.log(req.user);
+
     next();
   } else {
     res.status(403).json({

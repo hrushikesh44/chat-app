@@ -1,44 +1,55 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Navbar from './components/Navbar';
+import { Loader } from 'lucide-react';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const location = useLocation();
+
+  const authRoutes = ['/login', '/signup'];
+  const hideNavbar = authRoutes.includes(location.pathname);
+
+  if (hideNavbar) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a
-          href="https://vite.dev"
-          target="_blank"
-        >
-          <img
-            src={viteLogo}
-            className="logo"
-            alt="Vite logo"
+    <div className="min-h-screen w-full relative bg-white">
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          background:
+            'radial-gradient(circle at top center,rgba(173,109,244,0.44), transparent 70% )',
+        }}
+      >
+        {!hideNavbar && <Navbar />}
+        <Routes>
+          <Route
+            path="/"
+            element=<Home />
           />
-        </a>
-        <a
-          href="https://react.dev"
-          target="_blank"
-        >
-          <img
-            src={reactLogo}
-            className="logo react"
-            alt="React logo"
+          <Route
+            path="/signup"
+            element={<Signup />}
           />
-        </a>
+          <Route
+            path="/login"
+            element=<Login />
+          />
+          <Route
+            path="/profile"
+            element=<Profile />
+          />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    </div>
   );
 }
 

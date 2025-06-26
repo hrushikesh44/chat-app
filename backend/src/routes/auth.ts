@@ -3,6 +3,7 @@ import { User } from '../models/db';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { authMiddleware } from '../middleware/loginMiddleware';
 
 const router = express.Router();
 const JWT_PASSWORD = process.env.JWT_PASSWORD;
@@ -27,7 +28,7 @@ router.post('/signup', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 5);
 
-    await User.create({
+    const newUser = await User.create({
       email,
       fullName,
       password: hashedPassword,
@@ -86,6 +87,20 @@ router.post('/signin', async (req, res) => {
         token: token,
       });
     }
+  }
+});
+
+router.get('/checkauth', authMiddleware, async (req, res) => {
+  const userId = req.userId;
+  if (userId) {
+    const user = await User.findById(userId);
+    res.status(200).json({
+      message: 'Youre still logged in',
+    });
+  } else {
+    res.status(400).json({
+      message: 'Youre not logged in ',
+    });
   }
 });
 

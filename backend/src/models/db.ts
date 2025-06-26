@@ -5,6 +5,14 @@ dotenv.config();
 
 const url = process.env.MONGODB_URI;
 
+export interface UserDocument extends Document {
+  email: string;
+  fullName: string;
+  password: string;
+  profilePic: string;
+  _id: mongoose.Types.ObjectId;
+}
+
 const userSchema = new Schema(
   {
     email: {
@@ -49,6 +57,6 @@ const messageSchema = new Schema({
 });
 
 export const Message = mongoose.model('Message', messageSchema);
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model<UserDocument>('User', userSchema);
 
 mongoose.connect(url);
