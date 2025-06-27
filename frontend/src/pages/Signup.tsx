@@ -64,7 +64,10 @@ const Signup = () => {
               ref={passwordRef}
             />
             <div className="flex flex-col pt-5 text-lg font-medium">
-              <button className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-gradient-to-r from-[#9ea0f7] via-purple-500 to-[#9ea0f7] shadow-md hover:scale-105 transition duration-300 text-black/60 hover:text-black/90">
+              <button
+                onClick={Signup}
+                className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-gradient-to-r from-[#9ea0f7] via-purple-500 to-[#9ea0f7] shadow-md hover:scale-105 transition duration-300 text-black/60 hover:text-black/90"
+              >
                 Signup
               </button>
             </div>

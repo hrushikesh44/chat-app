@@ -4,7 +4,6 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
-import { Loader } from 'lucide-react';
 
 function App() {
   const location = useLocation();
@@ -12,16 +11,8 @@ function App() {
   const authRoutes = ['/login', '/signup'];
   const hideNavbar = authRoutes.includes(location.pathname);
 
-  if (hideNavbar) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader className="size-10 animate-spin" />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen w-full relative bg-white">
+    <div className="min-h-screen w-full relative bg-zinc-300">
       <div
         className="absolute inset-0 z-0"
         style={{

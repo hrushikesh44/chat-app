@@ -41,6 +41,6 @@ export const upload = multer({
   }),
 });
 
-router.post('/upload/profilepic', authMiddleware, upload.single('image'), uploadProfileImage);
+router.post('/upload/profilepic', authMiddleware, upload.single('file'), uploadProfileImage);
 
 export default router;

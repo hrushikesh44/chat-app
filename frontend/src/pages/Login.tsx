@@ -1,4 +1,27 @@
+import axios from 'axios';
+import { useRef } from 'react';
+import { url } from '../utils/config';
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+
+  async function Login() {
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    const res = await axios.post(`${url}/auth/signin`, {
+      email,
+      password,
+    });
+
+    const jwt = res.data.token;
+    localStorage.setItem('token', jwt);
+    navigate('/profile');
+  }
+
   return (
     <div className="h-screen flex items-center justify-center">
       <div className=" ">
@@ -17,18 +40,9 @@ const Login = () => {
               type="text"
               placeholder="johndoe@gmail.com"
               className="border border-zinc-900/10 rounded-md text-md p-3 focus:outline-none focus:ring-0 "
+              ref={emailRef}
             />
           </div>
-          {/* <div className="flex flex-col pb-1 text-lg font-medium">
-            <label className="label">
-              <span className="label-span pb-1 text-neutral-500">Full Name</span>
-            </label>
-            <input
-              type="text"
-              placeholder="John Doe"
-              className="border border-zinc-900/10 rounded-md text-md p-3 focus:outline-none focus:ring-0 "
-            />
-          </div> */}
           <div className="flex flex-col pb-1 text-lg font-medium">
             <label className="label">
               <span className="label-span pb-1  text-neutral-500">Password</span>
@@ -37,8 +51,12 @@ const Login = () => {
               type="text"
               placeholder=""
               className="border border-zinc-900/10 rounded-md text-md p-3 focus:outline-none focus:ring-0 "
+              ref={passwordRef}
             />
-            <div className="flex flex-col pt-5 text-lg font-medium">
+            <div
+              onClick={Login}
+              className="flex flex-col pt-5 text-lg font-medium"
+            >
               <button className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-gradient-to-r from-[#9ea0f7] via-purple-500 to-[#9ea0f7] shadow-md hover:scale-105 transition duration-300 text-black/60 hover:text-black/90">
                 Login
               </button>

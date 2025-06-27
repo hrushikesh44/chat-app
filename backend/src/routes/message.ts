@@ -66,6 +66,6 @@ router.post('/send', authMiddleware, async (req, res) => {
   });
 });
 
-router.post('/send/image', authMiddleware, upload.single('image'), uploadImage);
+router.post('/send/image', authMiddleware, upload.single('file'), uploadImage);
 
 export default router;

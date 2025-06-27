@@ -16,9 +16,6 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
       return;
     }
     req.userId = (decoded as JwtPayload).id;
-    //@ts-ignore
-    req.user = await User.findById(req.userId);
-    console.log(req.user);
 
     next();
   } else {

@@ -104,4 +104,12 @@ router.get('/checkauth', authMiddleware, async (req, res) => {
   }
 });
 
+router.get('/userDetails', authMiddleware, async (req, res) => {
+  const userId = req.userId;
+  const user = await User.findById(userId).select('-password -updatedAt -_id -__v');
+  res.json({
+    user,
+  });
+});
+
 export default router;

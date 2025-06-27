@@ -26,8 +26,6 @@ app.use('/api/message', messageRoutes);
 
 async function main() {
   await mongoose.connect(url);
-  console.log(url);
-  console.log(aws);
   console.log(`connected to mongo db compass`);
   app.listen(port);
   console.log(`listening on port ${port}`);
