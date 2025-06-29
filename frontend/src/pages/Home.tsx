@@ -1,5 +1,11 @@
+import MessageSkeleton from '../skeletons/MessageSkeleton';
+
 const Home = () => {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <MessageSkeleton />
+    </div>
+  );
 };
 
 export default Home;

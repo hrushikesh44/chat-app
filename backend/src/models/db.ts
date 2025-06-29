@@ -40,12 +40,10 @@ const userSchema = new Schema(
 const messageSchema = new Schema({
   senderId: {
     type: mongoose.Schema.Types.ObjectId,
-    unique: true,
     ref: 'User',
   },
   receiverId: {
     type: mongoose.Schema.Types.ObjectId,
-    unique: true,
     ref: 'User',
   },
   text: {

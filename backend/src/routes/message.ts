@@ -10,8 +10,12 @@ const router = express.Router();
 router.get('/users', authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
-    const filteredId = await User.find({ _id: { $ne: userId } }).select('-password');
-    res.status(200).json(filteredId);
+    const users = await User.find({ _id: { $ne: userId } }).select(
+      '-password -_id -__v -email -createdAt -updatedAt'
+    );
+    res.status(200).json({
+      users,
+    });
   } catch (error) {
     res.status(400).json({
       message: 'Internal server error',
@@ -19,9 +23,14 @@ router.get('/users', authMiddleware, async (req, res) => {
   }
 });
 
-router.get('/:id', authMiddleware, async (req, res) => {
-  const receiverId = req.params;
+router.get('/getMessages', authMiddleware, async (req, res) => {
+  const email = req.query.email;
+  console.log(email);
   const myId = req.userId;
+
+  const sender = await User.findOne({ _id: myId });
+  const receiver = await User.findOne({ email: email });
+  const receiverId = receiver?._id;
 
   try {
     const messages = await Message.find({
@@ -29,10 +38,11 @@ router.get('/:id', authMiddleware, async (req, res) => {
         { senderId: myId, receiverId: receiverId },
         { senderId: receiverId, receiverId: myId },
       ],
-    });
+    }).select('text -_id');
 
     res.status(200).json({
-      message: 'your messages',
+      sender: sender?.fullName,
+      receiver: receiver?.fullName,
       messages,
     });
   } catch (e) {
@@ -44,19 +54,20 @@ router.get('/:id', authMiddleware, async (req, res) => {
 
 router.post('/send', authMiddleware, async (req, res) => {
   const text = req.body.text;
-  const receiverId = req.body.receiverId;
+  const email = req.body.email;
   const myId = req.userId;
+  const receiver = await User.findOne({ email: email });
 
   console.log(req.body);
 
   const newMessage = new Message({
     senderId: myId,
-    receiverId: receiverId,
+    receiverId: receiver?._id,
     text: text,
   });
 
   await newMessage.save();
-  const receiverSocketId = getReceiverSocketId(receiverId);
+  const receiverSocketId = getReceiverSocketId(receiver?._id as any);
 
   if (receiverSocketId) {
     io.to(receiverSocketId).emit('newMessage', newMessage);

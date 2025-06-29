@@ -21,6 +21,7 @@ router.post('/signup', async (req, res) => {
     res.status(400).json({
       message: 'The credentials you entered were not the correct type',
     });
+    return;
   }
 
   try {
