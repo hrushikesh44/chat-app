@@ -1,4 +1,4 @@
-import ChatBubble from '../components/ChatBubble';
+import ChatBubble from '../components/ChatBubbleRec';
 import ChatContainer from '../components/ChatContainer';
 
 const MessageSkeleton = () => {

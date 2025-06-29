@@ -1,4 +1,4 @@
-import { Github, LucideTwitter, MessageCircleMore, Settings, User } from 'lucide-react';
+import { Github, LogOut, LucideTwitter, MessageCircleMore, User } from 'lucide-react';
 
 export default function Navbar() {
   return (
@@ -48,11 +48,11 @@ export default function Navbar() {
           </span>
           <span className=" rounded-lg p-1 hover:scale-105 duration-300 group">
             <a
-              href="/profile"
+              href="/login"
               className="text-neutral-500 flex flex-row font-medium"
             >
-              <span className="hidden md:block">Settings </span>
-              <Settings className="size-5 pt-0.5 tracking-normal group-hover:translate-x-1 transition-transform duration-300 ease-in-out" />
+              <span className="hidden md:block">Logout </span>
+              <LogOut className="size-5 pt-0.5 tracking-normal group-hover:translate-x-1 transition-transform duration-300 ease-in-out" />
             </a>
           </span>
         </div>

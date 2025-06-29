@@ -94,9 +94,9 @@ router.post('/signin', async (req, res) => {
 router.get('/checkauth', authMiddleware, async (req, res) => {
   const userId = req.userId;
   if (userId) {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select('-password -updatedAt');
     res.status(200).json({
-      message: 'Youre still logged in',
+      user,
     });
   } else {
     res.status(400).json({

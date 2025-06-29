@@ -1,28 +1,15 @@
 import axios from 'axios';
 import { url } from '../utils/config';
-import { useState } from 'react';
 
 interface userProps {
   user: string;
   image: string;
+  email: string;
 }
 
-const SidebarUser = ({ user, image }: userProps) => {
-  const [email, setEmail] = useState('');
-  async function getEmail() {
-    const res = await axios.get(`${url}/auth/userDetails`, {
-      headers: {
-        token: localStorage.getItem('token'),
-      },
-    });
-    const mail = res.data.email;
-    console.log(res.data);
-    setEmail(mail);
-  }
-  async function showMessages() {
-    await getEmail();
-    const res = await axios.get(`${url}/message/getMessages`, {
-      params: { email },
+const SidebarUser = ({ user, image, email }: userProps) => {
+  async function getMessages(email: string) {
+    const res = await axios.get(`${url}/message/getMessages?email=${email}`, {
       headers: {
         token: localStorage.getItem('token'),
       },
@@ -33,8 +20,8 @@ const SidebarUser = ({ user, image }: userProps) => {
 
   return (
     <div
-      className="flex min-w-[10vw] h-full p-2 m-3 rounded-xl border border-neutral-500 group hover:scale-105 duration-300 "
-      onClick={showMessages}
+      className="flex min-w-[10vw] h-full p-2 m-3 rounded-xl border border-black/10 hover:border-black/30 group hover:scale-105 duration-300 bg-purple-200"
+      onClick={() => getMessages(email)}
     >
       <img
         src={image || '/avatar.png'}

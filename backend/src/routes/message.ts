@@ -11,7 +11,7 @@ router.get('/users', authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
     const users = await User.find({ _id: { $ne: userId } }).select(
-      '-password -_id -__v -email -createdAt -updatedAt'
+      '-password -_id -__v -createdAt -updatedAt'
     );
     res.status(200).json({
       users,
@@ -41,8 +41,8 @@ router.get('/getMessages', authMiddleware, async (req, res) => {
     }).select('text -_id');
 
     res.status(200).json({
-      sender: sender?.fullName,
-      receiver: receiver?.fullName,
+      sender: sender?.email,
+      receiver: receiver?.email,
       messages,
     });
   } catch (e) {
@@ -54,7 +54,7 @@ router.get('/getMessages', authMiddleware, async (req, res) => {
 
 router.post('/send', authMiddleware, async (req, res) => {
   const text = req.body.text;
-  const email = req.body.email;
+  const email = req.query.email;
   const myId = req.userId;
   const receiver = await User.findOne({ email: email });
 
