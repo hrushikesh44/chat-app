@@ -10,10 +10,10 @@ const ChatBubbleSend = ({ profilePic, name, time, message }: chatBubbleProps) =>
     <div className="flex items-start gap-2.5 ml-auto p-3">
       <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-1 border-gray-200 bg-purple-900/30 rounded-e-xl rounded-es-xl ">
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
-          <span className="text-sm font-semibold text-gray-900 dark:text-white">{name}</span>
+          <span className="text-sm font-normal text-black/40 dark:text-white">{name}</span>
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{time}</span>
         </div>
-        <p className="text-sm font-normal py-2.5 text-black/40 dark:text-white">{message}</p>
+        <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{message}</p>
       </div>
       <img
         className="w-8 h-8 rounded-full"

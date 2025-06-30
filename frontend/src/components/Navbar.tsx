@@ -19,7 +19,7 @@ export default function Navbar() {
           </span>
           <span className=" rounded-lg p-1 hover:scale-105 duration-300 group">
             <a
-              href="/profile"
+              href="/messages"
               className="text-neutral-500 flex flex-row font-medium"
             >
               <span className="hidden md:block">Messages </span>

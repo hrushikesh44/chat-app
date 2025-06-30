@@ -4,6 +4,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
+import Messages from './pages/Messages';
 
 function App() {
   const location = useLocation();
@@ -37,6 +38,10 @@ function App() {
           <Route
             path="/profile"
             element=<Profile />
+          />
+          <Route
+            path="/messages"
+            element={<Messages />}
           />
         </Routes>
       </div>

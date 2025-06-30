@@ -32,7 +32,6 @@ const ChatContainer = () => {
   const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
   const selectedUserRef = useRef<string>('');
 
-  // Scroll to bottom on new message
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -41,7 +40,6 @@ const ChatContainer = () => {
     selectedUserRef.current = selectedUser;
   }, [selectedUser]);
 
-  // Socket.io setup
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (!userId) return;
@@ -64,9 +62,8 @@ const ChatContainer = () => {
       socket.off('getOnlineUsers');
       socket.disconnect();
     };
-  }, []); // ✅ only run once on mount
+  }, []);
 
-  // Get users and current user info
   async function getUsersDetails() {
     try {
       const res = await axios.get(`${url}/message/users`, {
@@ -89,7 +86,6 @@ const ChatContainer = () => {
     }
   }
 
-  // Get chat messages with selected user
   async function getMessages(userId: string) {
     try {
       const res = await axios.get(`${url}/message/getMessages?userId=${userId}`, {
@@ -105,7 +101,6 @@ const ChatContainer = () => {
     }
   }
 
-  // Send message
   async function sendMessage(receiverId: string) {
     const text = messageRef.current?.value;
     if (!text?.trim()) return;
