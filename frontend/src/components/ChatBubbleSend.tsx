@@ -1,7 +1,7 @@
 interface chatBubbleProps {
-  profilePic: string;
-  name: string;
-  time: string;
+  profilePic?: string;
+  name?: string;
+  time?: string;
   message: string;
 }
 
@@ -13,7 +13,7 @@ const ChatBubbleSend = ({ profilePic, name, time, message }: chatBubbleProps) =>
           <span className="text-sm font-semibold text-gray-900 dark:text-white">{name}</span>
           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{time}</span>
         </div>
-        <p className="text-sm font-normal py-2.5 text-black/40 dark:text-white">{'message'}</p>
+        <p className="text-sm font-normal py-2.5 text-black/40 dark:text-white">{message}</p>
       </div>
       <img
         className="w-8 h-8 rounded-full"

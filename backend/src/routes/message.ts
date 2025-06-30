@@ -11,7 +11,7 @@ router.get('/users', authMiddleware, async (req, res) => {
   try {
     const userId = req.userId;
     const users = await User.find({ _id: { $ne: userId } }).select(
-      '-password -_id -__v -createdAt -updatedAt'
+      '-password -email -__v -createdAt -updatedAt'
     );
     res.status(200).json({
       users,
@@ -24,25 +24,21 @@ router.get('/users', authMiddleware, async (req, res) => {
 });
 
 router.get('/getMessages', authMiddleware, async (req, res) => {
-  const email = req.query.email;
-  console.log(email);
+  const id = req.query.userId;
   const myId = req.userId;
-
-  const sender = await User.findOne({ _id: myId });
-  const receiver = await User.findOne({ email: email });
-  const receiverId = receiver?._id;
+  console.log('getmessages', id);
 
   try {
     const messages = await Message.find({
       $or: [
-        { senderId: myId, receiverId: receiverId },
-        { senderId: receiverId, receiverId: myId },
+        { senderId: myId, receiverId: id },
+        { senderId: id, receiverId: myId },
       ],
-    }).select('text -_id');
+    });
 
     res.status(200).json({
-      sender: sender?.email,
-      receiver: receiver?.email,
+      sender: myId,
+      receiver: id,
       messages,
     });
   } catch (e) {
@@ -53,28 +49,43 @@ router.get('/getMessages', authMiddleware, async (req, res) => {
 });
 
 router.post('/send', authMiddleware, async (req, res) => {
-  const text = req.body.text;
-  const email = req.query.email;
-  const myId = req.userId;
-  const receiver = await User.findOne({ email: email });
+  try {
+    const text = req.body.text;
+    const id = req.query.userId;
+    const myId = req.userId;
+    console.log('query', id);
 
-  console.log(req.body);
+    if (!text || !id) {
+      res.status(400).json({
+        message: 'text or receiver id is missing',
+      });
+      return;
+    }
 
-  const newMessage = new Message({
-    senderId: myId,
-    receiverId: receiver?._id,
-    text: text,
-  });
+    const newMessage = new Message({
+      senderId: myId,
+      receiverId: id,
+      text: text,
+    });
 
-  await newMessage.save();
-  const receiverSocketId = getReceiverSocketId(receiver?._id as any);
+    await newMessage.save();
+    //@ts-ignore
+    const receiverSocketId = getReceiverSocketId(id);
+    console.log('receiverid', receiverSocketId);
 
-  if (receiverSocketId) {
-    io.to(receiverSocketId).emit('newMessage', newMessage);
+    if (receiverSocketId) {
+      console.log('reached 1');
+      io.to(receiverSocketId).emit('newMessage', newMessage);
+      console.log('message sent', newMessage);
+    }
+    res.status(200).json({
+      newMessage,
+    });
+  } catch (err) {
+    res.json({
+      message: 'failed to send message',
+    });
   }
-  res.status(200).json({
-    newMessage,
-  });
 });
 
 router.post('/send/image', authMiddleware, upload.single('file'), uploadImage);

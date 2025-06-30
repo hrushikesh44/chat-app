@@ -5,13 +5,12 @@ import messageRoutes from './routes/message';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import { app, server } from './lib/socket';
 
-const app = express();
 app.use(express.json());
 dotenv.config();
 const url = process.env.MONGODB_URI;
 const port = process.env.PORT;
-const aws = process.env.AWS_ACCESS_KEY_ID;
 
 app.use(
   cors({
@@ -27,7 +26,7 @@ app.use('/api/message', messageRoutes);
 async function main() {
   await mongoose.connect(url);
   console.log(`connected to mongo db compass`);
-  app.listen(port);
+  server.listen(port);
   console.log(`listening on port ${port}`);
 }
 

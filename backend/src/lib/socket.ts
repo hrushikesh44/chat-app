@@ -11,26 +11,39 @@ const io = new Server(server, {
   },
 });
 
-export function getReceiverSocketId(userId: String) {
-  return userSocketMap[userId.toString()];
-}
+const userSocketMap: Record<string, string> = {};
 
-const userSocketMap: any = {};
+export function getReceiverSocketId(userId: string) {
+  return userSocketMap[userId];
+}
 
 io.on('connection', (socket) => {
   console.log('A user connected', socket.id);
 
-  const userId = socket.handshake.query.userId;
+  const userId = socket.handshake.query.userId as string;
   if (userId) {
-    userSocketMap[userId.toString()] = socket.id;
+    userSocketMap[userId] = socket.id;
+    io.emit('getOnlineUsers', Object.keys(userSocketMap));
   }
 
-  io.emit('getOnlineUsers', Object.keys(userSocketMap));
+  socket.on('privateMessage', ({ userId, text }) => {
+    const receiverSocketId = getReceiverSocketId(userId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit('private message', {
+        fromUserId: socket.handshake.query.userId,
+        text,
+      });
+    }
+  });
 
   socket.on('disconnect', () => {
     console.log('A user disconnected', socket.id);
-    if (typeof userId === 'string') {
-      delete userSocketMap[userId];
+
+    for (const [key, value] of Object.entries(userSocketMap)) {
+      if (value == socket.id) {
+        delete userSocketMap[key];
+        break;
+      }
     }
 
     io.emit('getOnlineUsers', Object.keys(userSocketMap));
