@@ -5,21 +5,23 @@ interface chatBubbleProps {
   message: string;
 }
 
-const ChatBubbleSend = ({ profilePic, name, time, message }: chatBubbleProps) => {
+const ChatBubbleSend = ({ profilePic, time, message }: chatBubbleProps) => {
   return (
-    <div className="flex items-start gap-2.5 ml-auto p-3">
-      <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-1 border-gray-200 bg-purple-900/30 rounded-e-xl rounded-es-xl ">
-        <div className="flex items-center space-x-2 rtl:space-x-reverse">
-          <span className="text-sm font-normal text-black/40 dark:text-white">{name}</span>
-          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">{time}</span>
+    <div className="chat chat-end pr-1.5">
+      <div className="chat-image avatar">
+        <div className="w-10 rounded-full">
+          <img
+            alt="Tailwind CSS chat bubble component"
+            src={profilePic || '/avatar.png'}
+          />
         </div>
-        <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{message}</p>
       </div>
-      <img
-        className="w-8 h-8 rounded-full"
-        src={profilePic || '/avatar.png'}
-        alt="Jese image"
-      />
+      <div className="chat-header text-neutral-500">
+        You
+        <time className="text-xs opacity-50">{time}</time>
+      </div>
+      <div className="chat-bubble bg-purple-900/30  shadow-md text-neutral-500">{message}</div>
+      <div className="chat-footer opacity-50">{time}</div>
     </div>
   );
 };

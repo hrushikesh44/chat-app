@@ -94,8 +94,6 @@ const ChatContainer = () => {
 
       setSelectedUser(userId);
       setMessages(res.data.messages);
-      console.log(selectedUser);
-      console.log(currentUserId);
     } catch (err) {
       console.error('Error fetching messages', err);
     }

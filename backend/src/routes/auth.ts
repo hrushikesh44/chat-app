@@ -97,6 +97,7 @@ router.get('/checkauth', authMiddleware, async (req, res) => {
     const user = await User.findById(userId).select('-password -updatedAt');
     res.status(200).json({
       userId: userId,
+      profilePic: user?.profilePic,
     });
   } else {
     res.status(400).json({
