@@ -13,38 +13,30 @@ function App() {
   const hideNavbar = authRoutes.includes(location.pathname);
 
   return (
-    <div className="min-h-screen w-full relative bg-zinc-300">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            'radial-gradient(circle at top center,rgba(173,109,244,0.44), transparent 70% )',
-        }}
-      >
-        {!hideNavbar && <Navbar />}
-        <Routes>
-          <Route
-            path="/"
-            element=<Home />
-          />
-          <Route
-            path="/signup"
-            element={<Signup />}
-          />
-          <Route
-            path="/login"
-            element=<Login />
-          />
-          <Route
-            path="/profile"
-            element=<Profile />
-          />
-          <Route
-            path="/messages"
-            element={<Messages />}
-          />
-        </Routes>
-      </div>
+    <div className="min-h-screen w-full relative bg-[#fefdfb]">
+      {!hideNavbar && <Navbar />}
+      <Routes>
+        <Route
+          path="/"
+          element=<Login />
+        />
+        <Route
+          path="/signup"
+          element={<Signup />}
+        />
+        <Route
+          path="/login"
+          element=<Login />
+        />
+        <Route
+          path="/profile"
+          element=<Profile />
+        />
+        <Route
+          path="/messages"
+          element={<Messages />}
+        />
+      </Routes>
     </div>
   );
 }

@@ -27,14 +27,12 @@ const Login = () => {
       <div className=" ">
         <div
           className="flex flex-col items-center justify-center p-6 sm:p-12 border border-zinc-900/10 w-fit
-        rounded-xl gap-5 bg-[#f4f4f4] shadow-2xl scroll-pb-20 text-neutral-500/75"
+        rounded-xl gap-5 bg-[#f4f4f4] shadow-2xl scroll-pb-20 text-neutral-900"
         >
-          <h1 className="text-3xl font-bold text-transparent tracking-tight bg-clip-text bg-gradient-to-r from-[#9ea0f7] via-purple-500 to-[#9ea0f7]">
-            Login for Chatter
-          </h1>
+          <h1 className="text-3xl font-bold text-neutral-900 tracking-tight ">Login for Chatter</h1>
           <div className="flex flex-col pb-1 text-lg font-medium ">
             <label className="label">
-              <span className="label-span pb-1  text-neutral-500">Email</span>
+              <span className="label-span pb-1  text-neutral-800">Email</span>
             </label>
             <input
               type="text"
@@ -45,10 +43,10 @@ const Login = () => {
           </div>
           <div className="flex flex-col pb-1 text-lg font-medium">
             <label className="label">
-              <span className="label-span pb-1  text-neutral-500">Password</span>
+              <span className="label-span pb-1  text-neutral-800">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder=""
               className="border border-zinc-900/10 rounded-md text-md p-3 focus:outline-none focus:ring-0 "
               ref={passwordRef}
@@ -57,10 +55,19 @@ const Login = () => {
               onClick={Login}
               className="flex flex-col pt-5 text-lg font-medium"
             >
-              <button className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-gradient-to-r from-[#9ea0f7] via-purple-500 to-[#9ea0f7] shadow-md hover:scale-105 transition duration-300 text-black/60 hover:text-black/90">
+              <button className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-neutral-900 shadow-md hover:scale-105 transition duration-300 text-neutral-200">
                 Login
               </button>
             </div>
+            <p className="text-neutral-600 text-[18px] font-normal mx-auto pt-2">
+              Don,t have an account?{' '}
+              <a
+                className="text-blue-600 cursor-pointer"
+                href="/signup"
+              >
+                Sign up
+              </a>
+            </p>
           </div>
         </div>
       </div>

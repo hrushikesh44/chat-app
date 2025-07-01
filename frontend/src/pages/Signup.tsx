@@ -28,12 +28,12 @@ const Signup = () => {
           className="flex flex-col items-center justify-center p-6 sm:p-12 border border-zinc-900/10 w-fit
         rounded-xl gap-5 bg-[#f4f4f4] shadow-2xl scroll-pb-20 text-neutral-500/75"
         >
-          <h1 className="text-3xl font-bold text-transparent tracking-tight bg-clip-text bg-gradient-to-r from-[#9ea0f7] via-purple-500 to-[#9ea0f7]">
+          <h1 className="text-3xl font-bold text-neutral-900 tracking-tight">
             Sign up for Chatter
           </h1>
           <div className="flex flex-col pb-1 text-lg font-medium ">
             <label className="label">
-              <span className="label-span pb-1  text-neutral-500">Email</span>
+              <span className="label-span pb-1  text-neutral-800">Email</span>
             </label>
             <input
               type="text"
@@ -44,7 +44,7 @@ const Signup = () => {
           </div>
           <div className="flex flex-col pb-1 text-lg font-medium">
             <label className="label">
-              <span className="label-span pb-1 text-neutral-500">Full Name</span>
+              <span className="label-span pb-1 text-neutral-800">Full Name</span>
             </label>
             <input
               type="text"
@@ -55,10 +55,10 @@ const Signup = () => {
           </div>
           <div className="flex flex-col pb-1 text-lg font-medium">
             <label className="label">
-              <span className="label-span pb-1  text-neutral-500">Password</span>
+              <span className="label-span pb-1  text-neutral-800">Password</span>
             </label>
             <input
-              type="text"
+              type="password"
               placeholder=""
               className="border border-zinc-900/10 rounded-md text-md p-3 focus:outline-none focus:ring-0 "
               ref={passwordRef}
@@ -66,11 +66,20 @@ const Signup = () => {
             <div className="flex flex-col pt-5 text-lg font-medium">
               <button
                 onClick={Signup}
-                className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-gradient-to-r from-[#9ea0f7] via-purple-500 to-[#9ea0f7] shadow-md hover:scale-105 transition duration-300 text-black/60 hover:text-black/90"
+                className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-neutral-800 shadow-md hover:scale-105 transition duration-300 text-neutral-300 "
               >
                 Signup
               </button>
             </div>
+            <p className="text-neutral-600 text-[18px] font-normal mx-auto pt-2">
+              Already have a account?{' '}
+              <a
+                className="text-blue-600  cursor-pointer"
+                href="/login"
+              >
+                Login
+              </a>
+            </p>
           </div>
         </div>
       </div>

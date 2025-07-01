@@ -20,7 +20,7 @@ const ChatBubbleSend = ({ profilePic, time, message }: chatBubbleProps) => {
         You
         <time className="text-xs opacity-50">{time}</time>
       </div>
-      <div className="chat-bubble bg-purple-900/30  shadow-md text-neutral-500">{message}</div>
+      <div className="chat-bubble bg-[#777070]  shadow-md text-neutral-100">{message}</div>
       <div className="chat-footer opacity-50">{time}</div>
     </div>
   );

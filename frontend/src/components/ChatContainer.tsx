@@ -48,6 +48,7 @@ const ChatContainer = () => {
 
     socket.on('newMessage', (newMessage: Message) => {
       const activeChatUser = selectedUserRef.current;
+      console.log(activeChatUser);
       if (newMessage.senderId === activeChatUser || newMessage.receiverId === activeChatUser) {
         setMessages((prev) => [...prev, newMessage]);
       }
@@ -102,6 +103,7 @@ const ChatContainer = () => {
   async function sendMessage(receiverId: string) {
     const text = messageRef.current?.value;
     if (!text?.trim()) return;
+    console.log(receiverId);
 
     try {
       const res = await axios.post(
@@ -121,27 +123,27 @@ const ChatContainer = () => {
   const isUserOnline = (userId: string) => onlineUsers.includes(userId);
 
   return (
-    <div className="h-[70vh] w-[70vw] mx-auto flex items-center justify-center bg-purple-200 rounded-xl mt-10 shadow-md shadow-neutral-400">
+    <div className="h-[70vh] w-[70vw] mx-auto flex items-center justify-center bg-neutral-100 rounded-xl mt-10 shadow-md shadow-neutral-400">
       <div className="min-w-[75vw] md:min-w-[25vw] min-h-[70vh] p-5 border-r border-neutral-400">
         {/* Contacts Panel */}
         <div className="text-black/40 border-b border-neutral-400/80 pb-2">
-          <div className="flex pb-2">
+          <div className="flex pb-2 text-neutral-900">
             <MessageCircleMoreIcon className="size-10" />
             <span className="text-3xl font-bold pt-1 ml-3">Contacts</span>
           </div>
           <input
             type="radio"
-            className="border border-gray-500 rounded-full bg-gray-100/10 accent-purple-200 pr-5 ml-3"
+            className="border border-gray-500 rounded-full bg-gray-100/10 accent-neutral-200 pr-5 ml-3"
             onChange={getUsersDetails}
           />
-          <span className="text-xl font-medium pl-3">Show Users</span>
+          <span className="text-xl font-medium pl-3 text-neutral-900 ">Show Users</span>
         </div>
 
-        <div className="min-w-[13vw] min-h-[55vh] border border-black/10 rounded-xl mt-3 bg-purple-500/10">
+        <div className="min-w-[13vw] min-h-[55vh] border border-black/10 rounded-xl mt-3 bg-neutral-500/10">
           {users.map((user) => (
             <div
               key={user._id}
-              className="flex justify-between items-center p-2 m-3 rounded-xl border border-black/10 hover:border-black/30 group hover:scale-105 duration-300 bg-purple-200 cursor-pointer"
+              className="flex justify-between items-center p-2 m-3 rounded-xl border border-black/10 text-neutral-900 hover:border-black/30 group hover:scale-105 duration-300 bg-neutral-200 cursor-pointer"
               onClick={() => getMessages(user._id)}
             >
               <div className="flex items-center">
@@ -150,7 +152,7 @@ const ChatContainer = () => {
                   alt="user"
                   className="size-10 rounded-full"
                 />
-                <span className="text-xl text-neutral-500 font-normal pl-2 pt-1 group-hover:text-neutral-800 group-hover:scale-105 duration-300">
+                <span className="text-xl text-neutral-900 font-normal pl-2 pt-1 group-hover:scale-105 duration-300">
                   {user.fullName}
                 </span>
               </div>
@@ -167,8 +169,8 @@ const ChatContainer = () => {
 
       <div className="min-w-[45vw] min-h-[70vh] hidden md:block">
         {/* Chat Window */}
-        <div className="bg-purple-500/10 min-h-[65vh] min-w-[35vw] max-w-[40vw] m-5 mx-auto rounded-xl border border-black/10">
-          <div className="min-w-[35vw] max-w-[38vw] min-h-[55vh] max-h-[55vh] flex flex-col overflow-y-auto bg-purple-100 m-3 mx-auto rounded-xl custom-scrollbar">
+        <div className="bg-neutral-500/10 min-h-[65vh] min-w-[35vw] max-w-[40vw] m-5 mx-auto rounded-xl border border-black/10">
+          <div className="min-w-[35vw] max-w-[38vw] min-h-[55vh] max-h-[55vh] flex flex-col overflow-y-auto bg-neutral-100 m-3 mx-auto rounded-xl custom-scrollbar">
             {messages.map((msg) =>
               msg.senderId === currentUserId ? (
                 <ChatBubbleSend
@@ -192,11 +194,11 @@ const ChatContainer = () => {
             <div ref={messageEndRef} />
           </div>
 
-          <div className="flex">
+          <div className="flex text-neutral-900">
             <input
               type="text"
-              className="pl-5 text-xl rounded-full md:min-w-[20vw] lg:min-w-[32vw] h-14 bg-purple-200 ml-5 border border-black/10
-              text-black/40 focus:outline-none focus:ring-0"
+              className="pl-5 text-xl rounded-full md:min-w-[20vw] lg:min-w-[32vw] h-14 bg-neutral-100 ml-5 border border-black/10
+              text-neutral-700 focus:outline-none focus:ring-0"
               placeholder="Type here..."
               ref={messageRef}
               value={message}
@@ -206,8 +208,8 @@ const ChatContainer = () => {
               }}
             />
             <button
-              className="ml-2 xl:ml-3 p-4 xl:p-3 h-fit min-w-[2vw] md:min-w-[5vw] bg-purple-600/10 rounded-full border border-black/10 text-xl flex items-center
-            font-bold text-black/40 cursor-pointer hover:scale-105 hover:text-black/60 hover:border-black/30 duration-200 group"
+              className="ml-2 xl:ml-3 p-4 xl:p-3 h-fit min-w-[2vw] md:min-w-[5vw] bg-neutral-600/10 rounded-full border border-black/10 text-xl flex items-center
+            font-bold  cursor-pointer hover:scale-105  hover:border-black/30 duration-200 group"
               onClick={() => sendMessage(selectedUser)}
             >
               <span className="hidden xl:block">Send</span>

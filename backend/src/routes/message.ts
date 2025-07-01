@@ -51,9 +51,9 @@ router.get('/getMessages', authMiddleware, async (req, res) => {
 router.post('/send', authMiddleware, async (req, res) => {
   try {
     const text = req.body.text;
-    const id = req.query.userId;
+    const id = req.query.userId?.toString();
     const myId = req.userId;
-    console.log('query', id);
+    console.log('query from message api', id);
 
     if (!text || !id) {
       res.status(400).json({
@@ -67,11 +67,10 @@ router.post('/send', authMiddleware, async (req, res) => {
       receiverId: id,
       text: text,
     });
+    console.log(newMessage);
 
     await newMessage.save();
-    //@ts-ignore
     const receiverSocketId = getReceiverSocketId(id);
-    console.log('receiverid', receiverSocketId);
 
     if (receiverSocketId) {
       console.log('reached 1');
@@ -80,6 +79,7 @@ router.post('/send', authMiddleware, async (req, res) => {
     }
     res.status(200).json({
       newMessage,
+      receiverSocketId: receiverSocketId,
     });
   } catch (err) {
     res.json({

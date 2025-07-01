@@ -11,7 +11,7 @@ const JWT_PASSWORD = process.env.JWT_PASSWORD;
 router.post('/signup', async (req, res) => {
   const requiredBody = z.object({
     email: z.string().email(),
-    fullName: z.string().min(8).max(30),
+    fullName: z.string().min(5).max(30),
     password: z.string().min(6).max(64),
   });
 

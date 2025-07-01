@@ -52,9 +52,9 @@ const Profile = () => {
   }, [username, email, url]);
 
   return (
-    <div className="h-fit text-neutral-900/50 overflow-hidden">
+    <div className="h-fit text-neutral-900 overflow-hidden">
       <div className="max-w-2xl mx-auto p-4 py-8">
-        <div className="bg-purple-200 rounded-xl p-6 space-y-8">
+        <div className="bg-neutral-200 rounded-xl p-6 space-y-8">
           <div className="text-center">
             <h1 className="text-2xl font-semibold ">Profile</h1>
             <p className="mt-2">Your profile information</p>
@@ -78,7 +78,7 @@ const Profile = () => {
                   transition-all duration-200
                 `}
               >
-                <Camera className="w-5 h-5 text-base-200" />
+                <Camera className="w-5 h-5 text-neutral-800" />
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -90,30 +90,30 @@ const Profile = () => {
                 />
               </label>
             </div>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-neutral-900">
               {isUpdatingProfile ? 'Uploading...' : 'Click the camera icon to update your photo'}
             </p>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-1.5">
-              <div className="text-sm text-neutral-900/50 flex items-center gap-2 ">
+              <div className="text-sm text-neutral-900 flex items-center gap-2 ">
                 <User className="w-4 h-4" />
                 Full Name
               </div>
-              <p className="px-4 py-2.5 bg-purple-100 rounded-lg border">{username}</p>
+              <p className="px-4 py-2.5 bg-neutral-100 rounded-lg border">{username}</p>
             </div>
 
             <div className="space-y-1.5">
-              <div className="text-sm text-neutral-900/50 flex items-center gap-2">
+              <div className="text-sm text-neutral-900 flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 Email Address
               </div>
-              <p className="px-4 py-2.5 bg-purple-100 rounded-lg border">{email}</p>
+              <p className="px-4 py-2.5 bg-neutral-100 rounded-lg border">{email}</p>
             </div>
           </div>
 
-          <div className="mt-6 bg-purple-200 rounded-xl p-6">
+          <div className="mt-6 bg-neutral-200 rounded-xl p-6">
             <h2 className="text-lg font-medium  mb-4">Account Information</h2>
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between py-2 border-b border-zinc-700">
@@ -122,7 +122,7 @@ const Profile = () => {
               </div>
               <div className="flex items-center justify-between py-2">
                 <span>Account Status</span>
-                <span className="text-green-500">Active</span>
+                <span className="text-green-500"> 🟢 Active</span>
               </div>
             </div>
           </div>
