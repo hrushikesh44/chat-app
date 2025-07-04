@@ -1,5 +1,4 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -9,7 +8,7 @@ import Messages from './pages/Messages';
 function App() {
   const location = useLocation();
 
-  const authRoutes = ['/login', '/signup'];
+  const authRoutes = ['/login', '/signup', '/'];
   const hideNavbar = authRoutes.includes(location.pathname);
 
   return (
@@ -18,7 +17,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element=<Login />
+          element={<Login />}
         />
         <Route
           path="/signup"
@@ -26,11 +25,11 @@ function App() {
         />
         <Route
           path="/login"
-          element=<Login />
+          element={<Login />}
         />
         <Route
           path="/profile"
-          element=<Profile />
+          element={<Profile />}
         />
         <Route
           path="/messages"

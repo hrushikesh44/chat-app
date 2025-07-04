@@ -208,12 +208,12 @@ const ChatContainer = () => {
               }}
             />
             <button
-              className="ml-2 xl:ml-3 p-4 xl:p-3 h-fit min-w-[2vw] md:min-w-[5vw] bg-neutral-600/10 rounded-full border border-black/10 text-xl flex items-center
+              className="ml-2 xl:ml-3 p-4 xl:p-3 h-fit min-w-[2vw] md:min-w-[5vw] bg-neutral-600/10 rounded-full border border-black/10 text-lg flex items-center
             font-bold  cursor-pointer hover:scale-105  hover:border-black/30 duration-200 group"
               onClick={() => sendMessage(selectedUser)}
             >
               <span className="hidden xl:block">Send</span>
-              <Send className="size-7 lg:size-5 group-hover:translate-x-0.5 transition-transform ease-in-out duration-300" />
+              <Send className="size-4 lg:size-5 group-hover:translate-x-0.5 transition-transform ease-in-out duration-300" />
             </button>
           </div>
         </div>

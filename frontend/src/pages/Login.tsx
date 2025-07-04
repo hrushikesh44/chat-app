@@ -24,13 +24,12 @@ const Login = () => {
 
   return (
     <div className="h-screen flex items-center justify-center">
-      <div className=" ">
         <div
           className="flex flex-col items-center justify-center p-6 sm:p-12 border border-zinc-900/10 w-fit
         rounded-xl gap-5 bg-[#f4f4f4] shadow-2xl scroll-pb-20 text-neutral-900"
         >
           <h1 className="text-3xl font-bold text-neutral-900 tracking-tight ">Login for Chatter</h1>
-          <div className="flex flex-col pb-1 text-lg font-medium ">
+          <div className="flex flex-col pb-1 text-lg font-medium w-full">
             <label className="label">
               <span className="label-span pb-1  text-neutral-800">Email</span>
             </label>
@@ -41,7 +40,7 @@ const Login = () => {
               ref={emailRef}
             />
           </div>
-          <div className="flex flex-col pb-1 text-lg font-medium">
+          <div className="flex flex-col pb-1 text-lg font-medium w-full">
             <label className="label">
               <span className="label-span pb-1  text-neutral-800">Password</span>
             </label>
@@ -51,9 +50,10 @@ const Login = () => {
               className="border border-zinc-900/10 rounded-md text-md p-3 focus:outline-none focus:ring-0 "
               ref={passwordRef}
             />
+            </div>
             <div
               onClick={Login}
-              className="flex flex-col pt-5 text-lg font-medium"
+              className="flex flex-col pt-5 text-lg font-medium w-full"
             >
               <button className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-neutral-900 shadow-md hover:scale-105 transition duration-300 text-neutral-200">
                 Login
@@ -68,9 +68,7 @@ const Login = () => {
                 Sign up
               </a>
             </p>
-          </div>
         </div>
-      </div>
     </div>
   );
 };
