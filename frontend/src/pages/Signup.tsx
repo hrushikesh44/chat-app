@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { url } from '../utils/config';
+import { apiUrl } from '../utils/config';
 
 const Signup = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -13,7 +13,7 @@ const Signup = () => {
     const email = emailRef.current?.value;
     const fullName = fullNameRef.current?.value;
     const password = passwordRef.current?.value;
-    await axios.post(`${url}/auth/signup`, {
+    await axios.post(`${apiUrl}/auth/signup`, {
       email,
       fullName,
       password,

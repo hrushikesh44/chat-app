@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { url } from '../utils/config';
+import { apiUrl } from '../utils/config';
 import { MessageCircleMoreIcon, Send } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ChatBubbleRec from './ChatBubbleRec';
@@ -67,11 +67,11 @@ const ChatContainer = () => {
 
   async function getUsersDetails() {
     try {
-      const res = await axios.get(`${url}/message/users`, {
+      const res = await axios.get(`${apiUrl}/message/users`, {
         headers: { token: localStorage.getItem('token') },
       });
 
-      const localRes = await axios.get(`${url}/auth/checkAuth`, {
+      const localRes = await axios.get(`${apiUrl}/auth/checkAuth`, {
         headers: { token: localStorage.getItem('token') },
       });
 
@@ -89,7 +89,7 @@ const ChatContainer = () => {
 
   async function getMessages(userId: string) {
     try {
-      const res = await axios.get(`${url}/message/getMessages?userId=${userId}`, {
+      const res = await axios.get(`${apiUrl}/message/getMessages?userId=${userId}`, {
         headers: { token: localStorage.getItem('token') },
       });
 
@@ -107,7 +107,7 @@ const ChatContainer = () => {
 
     try {
       const res = await axios.post(
-        `${url}/message/send?userId=${receiverId}`,
+        `${apiUrl}/message/send?userId=${receiverId}`,
         { text },
         { headers: { token: localStorage.getItem('token') } }
       );
@@ -123,8 +123,8 @@ const ChatContainer = () => {
   const isUserOnline = (userId: string) => onlineUsers.includes(userId);
 
   return (
-    <div className="h-[70vh] w-[70vw] mx-auto flex items-center justify-center bg-neutral-100 rounded-xl mt-10 shadow-md shadow-neutral-400">
-      <div className="min-w-[75vw] md:min-w-[25vw] min-h-[70vh] p-5 border-r border-neutral-400">
+    <div className="w-[90vw] h-[70vh] md:w-[70vw] mx-auto flex items-center justify-center bg-neutral-100 rounded-xl mt-10 shadow-md shadow-neutral-400">
+      <div className="w-[40vw] md:min-w-[25vw] min-h-[70vh] p-5 border-r border-neutral-400">
         {/* Contacts Panel */}
         <div className="text-black/40 border-b border-neutral-400/80 pb-2">
           <div className="flex pb-2 text-neutral-900">
@@ -134,7 +134,7 @@ const ChatContainer = () => {
           <input
             type="radio"
             className="border border-gray-500 rounded-full bg-gray-100/10 accent-neutral-200 pr-5 ml-3"
-            onChange={getUsersDetails}
+            onChange={() => getUsersDetails()}
           />
           <span className="text-xl font-medium pl-3 text-neutral-900 ">Show Users</span>
         </div>
@@ -150,9 +150,9 @@ const ChatContainer = () => {
                 <img
                   src={user.profilePic || '/avatar.png'}
                   alt="user"
-                  className="size-10 rounded-full"
+                  className="size-6 md:size-10 rounded-full"
                 />
-                <span className="text-xl text-neutral-900 font-normal pl-2 pt-1 group-hover:scale-105 duration-300">
+                <span className="text-sm md:text-xl truncate text-neutral-900 font-normal pl-2 pt-1 group-hover:scale-105 duration-300">
                   {user.fullName}
                 </span>
               </div>
@@ -167,10 +167,10 @@ const ChatContainer = () => {
         </div>
       </div>
 
-      <div className="min-w-[45vw] min-h-[70vh] hidden md:block">
+      <div className="min-w-[45vw] min-h-[70vh]">
         {/* Chat Window */}
-        <div className="bg-neutral-500/10 min-h-[65vh] min-w-[35vw] max-w-[40vw] m-5 mx-auto rounded-xl border border-black/10">
-          <div className="min-w-[35vw] max-w-[38vw] min-h-[55vh] max-h-[55vh] flex flex-col overflow-y-auto bg-neutral-100 m-3 mx-auto rounded-xl custom-scrollbar">
+        <div className="bg-neutral-500/10 min-h-[65vh] w-[50vw] md:min-w-[35vw] md:max-w-[40vw] m-1 md:m-5 mx-auto rounded-xl border border-black/10">
+          <div className="w-[40vw] md:min-w-[35vw] md:max-w-[38vw] min-h-[55vh] max-h-[55vh] flex flex-col overflow-y-auto bg-neutral-100 m-3 mx-auto rounded-xl custom-scrollbar">
             {messages.map((msg) =>
               msg.senderId === currentUserId ? (
                 <ChatBubbleSend
@@ -197,7 +197,7 @@ const ChatContainer = () => {
           <div className="flex text-neutral-900">
             <input
               type="text"
-              className="pl-5 text-xl rounded-full md:min-w-[20vw] lg:min-w-[32vw] h-14 bg-neutral-100 ml-5 border border-black/10
+              className="pl-5 text-sm md:text-xl rounded-full w-[32vw] md:w-[50vw] mb-2 h-14 bg-neutral-100 ml-5 border border-black/10
               text-neutral-700 focus:outline-none focus:ring-0"
               placeholder="Type here..."
               ref={messageRef}
@@ -208,7 +208,7 @@ const ChatContainer = () => {
               }}
             />
             <button
-              className="ml-2 xl:ml-3 p-4 xl:p-3 h-fit min-w-[2vw] md:min-w-[5vw] bg-neutral-600/10 rounded-full border border-black/10 text-lg flex items-center
+              className="ml-2 xl:ml-3 p-3 xl:p-3 h-fit bg-neutral-600/10 rounded-xl border border-black/10 text-lg flex items-center
             font-bold  cursor-pointer hover:scale-105  hover:border-black/30 duration-200 group"
               onClick={() => sendMessage(selectedUser)}
             >
