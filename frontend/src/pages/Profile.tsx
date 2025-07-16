@@ -1,5 +1,5 @@
 import { Camera, Mail, User } from 'lucide-react';
-import { url } from '../utils/config';
+import { apiUrl } from '../utils/config';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 
@@ -21,7 +21,7 @@ const Profile = () => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post(`${url}/upload/profilePic`, formData, {
+      const res = await axios.post(`${apiUrl}/upload/profilePic`, formData, {
         headers: {
           token: localStorage.getItem('token'),
         },
@@ -36,7 +36,7 @@ const Profile = () => {
   };
 
   async function getUserDetails() {
-    const response = await axios.get(`${url}/auth/userDetails`, {
+    const response = await axios.get(`${apiUrl}/auth/userDetails`, {
       headers: {
         token: localStorage.getItem('token'),
       },
@@ -49,7 +49,7 @@ const Profile = () => {
 
   useEffect(() => {
     getUserDetails();
-  }, [username, email, url]);
+  }, [username, email]);
 
   return (
     <div className="h-fit text-neutral-900 overflow-hidden">

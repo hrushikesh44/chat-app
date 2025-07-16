@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useRef } from 'react';
-import { url } from '../utils/config';
+import { apiUrl } from '../utils/config';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -8,11 +8,11 @@ const Login = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  async function Login() {
+  async function login() {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    const res = await axios.post(`${url}/auth/signin`, {
+    const res = await axios.post(`${apiUrl}/auth/signin`, {
       email,
       password,
     });
@@ -52,7 +52,7 @@ const Login = () => {
             />
             </div>
             <div
-              onClick={Login}
+              onClick={() => login()}
               className="flex flex-col pt-5 text-lg font-medium w-full"
             >
               <button className="p-2.5 cursor-pointer border border-white/10 rounded-md bg-neutral-900 shadow-md hover:scale-105 transition duration-300 text-neutral-200">
