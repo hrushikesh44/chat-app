@@ -60,7 +60,7 @@ const Login = () => {
               </button>
             </div>
             <p className="text-neutral-600 text-[18px] font-normal mx-auto pt-2">
-              Don,t have an account?{' '}
+              Don't have an account?{' '}
               <a
                 className="text-blue-600 cursor-pointer"
                 href="/signup"

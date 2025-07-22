@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import Messages from './pages/Messages';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   const location = useLocation();
@@ -15,8 +16,12 @@ function App() {
     <div className="min-h-screen w-full relative bg-[#fefdfb]">
       {!hideNavbar && <Navbar />}
       <Routes>
+        <Route 
+          path='/'
+          element={<Dashboard />}
+        />
         <Route
-          path="/"
+          path="/login"
           element={<Login />}
         />
         <Route

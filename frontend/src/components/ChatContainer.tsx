@@ -197,7 +197,7 @@ const ChatContainer = () => {
           <div className="flex text-neutral-900">
             <input
               type="text"
-              className="pl-5 text-sm md:text-xl rounded-full w-[32vw] md:w-[50vw] mb-2 h-14 bg-neutral-100 ml-5 border border-black/10
+              className="pl-5 text-sm md:text-xl rounded-full w-[32vw] mb-2 h-14 bg-neutral-100 ml-5 border border-black/10
               text-neutral-700 focus:outline-none focus:ring-0"
               placeholder="Type here..."
               ref={messageRef}
@@ -208,8 +208,7 @@ const ChatContainer = () => {
               }}
             />
             <button
-              className="ml-2 xl:ml-3 p-3 xl:p-3 h-fit bg-neutral-600/10 rounded-xl border border-black/10 text-lg flex items-center
-            font-bold  cursor-pointer hover:scale-105  hover:border-black/30 duration-200 group"
+              className="ml-1 xl:ml-3 p-3 xl:p-3 h-fit bg-neutral-600/10 rounded-full border border-black/10 text-lg flex items-center font-bold  cursor-pointer hover:scale-105  hover:border-black/30 duration-200 group"
               onClick={() => sendMessage(selectedUser)}
             >
               <span className="hidden xl:block">Send</span>
